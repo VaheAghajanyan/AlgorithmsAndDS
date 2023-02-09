@@ -1,6 +1,8 @@
 package Arrays;
 
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 public class ArrayProblems {
     public static void main(String[] args) {
@@ -69,6 +71,10 @@ public class ArrayProblems {
             return null;
         }
 
+        /*
+
+        Solution 1 - Time Complexity n^2
+
         for (int i = 0; i < nums.length - 1; i++) {
             for (int j = 1; j < nums.length; j++) {
                 if (nums[i] + nums[j] == target && i != j) {
@@ -77,6 +83,21 @@ public class ArrayProblems {
             }
         }
         return null;
-    }
+    }*/
 
+        Map<Integer, Integer> map = new HashMap<>();
+
+        for (int i = 0; i < nums.length; i++) {
+            map.put(nums[i], i);
+        }
+
+        for (int i = 0; i < nums.length; i++) {
+            if (map.containsKey(target - nums[i])) {
+                System.out.println(Arrays.toString(new int[] {i, map.get(target - nums[i])}));
+                return new int[] {i, map.get(target - nums[i])};
+            }
+        }
+
+        return null;
+    }
 }
